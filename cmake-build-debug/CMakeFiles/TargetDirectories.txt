@@ -1,3 +1,0 @@
-C:/Users/Jo/CLionProjects/FutureGames-AlgosAndDataStructuresAssignement/cmake-build-debug/CMakeFiles/FutureGames_AlgosAndDataStructuresAssignement.dir
-C:/Users/Jo/CLionProjects/FutureGames-AlgosAndDataStructuresAssignement/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Jo/CLionProjects/FutureGames-AlgosAndDataStructuresAssignement/cmake-build-debug/CMakeFiles/rebuild_cache.dir
