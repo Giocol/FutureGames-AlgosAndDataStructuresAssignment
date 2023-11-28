@@ -31,6 +31,20 @@ namespace SimpleSorting {
             }
         }
     }
+
+    void selectionSort(int array[], int size) {
+        for(int i = 0; i < size; i++) {
+            int lowestValueIndex = i;
+            for(int j = i+1; j<size; j++) {
+                if(array[j] < array[lowestValueIndex]) {
+                    lowestValueIndex = j;
+                }
+            }
+            if(array[i] != array[lowestValueIndex]) {
+                swap(array, i, lowestValueIndex);
+            }
+        }
+    }
 }
 
 #endif //FUTUREGAMES_ALGOSANDDATASTRUCTURESASSIGNEMENT_SIMPLESORTING_H
