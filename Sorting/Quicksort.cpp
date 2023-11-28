@@ -4,11 +4,11 @@
 
 #include "Quicksort.h"
 
-void Quicksort::quicksort(int array[], int start, int end) {
+void Quicksort::sort(int array[], int start, int end) {
     if(start < end) {
         int pivot = partition(array, start, end);
-        quicksort(array, start, pivot-1);
-        quicksort(array, pivot+1, end);
+        sort(array, start, pivot - 1);
+        sort(array, pivot + 1, end);
     }
 }
 

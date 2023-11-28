@@ -8,10 +8,10 @@
 
 class Quicksort {
 public:
-    void quicksort(int array[], int start, int end);
+    static void sort(int array[], int start, int end);
 private:
-    int partition(int array[], int start, int end);
-    static int pickPivot(int array[], int start, int end);
+    static int partition(int array[], int start, int end);
+    static inline int pickPivot(int array[], int start, int end);
     static void swap(int array[], int a, int b);
 };
 
