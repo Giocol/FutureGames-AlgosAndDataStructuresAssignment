@@ -9,7 +9,7 @@ int main() {
     int testArray[ARRAY_SIZE];
     ArrayUtils::generateRandomArray(testArray, ARRAY_SIZE, MAX_VALUE_IN_ARRAY);
     ArrayUtils::printArray(testArray, ARRAY_SIZE);
-    SimpleSorting::insertionSort(testArray, ARRAY_SIZE);
+    SimpleSorting::bubbleSort(testArray, ARRAY_SIZE);
     ArrayUtils::printArray(testArray, ARRAY_SIZE);
     return 0;
 }
