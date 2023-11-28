@@ -9,4 +9,5 @@ add_executable(FutureGames_AlgosAndDataStructuresAssignement main.cpp
         Utils/ArrayUtils.h
         Sorting/Heapsort.cpp
         Sorting/Heapsort.h
+        Utils/ProfilingUtils.h
 )
