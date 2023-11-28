@@ -3,7 +3,6 @@
 //
 
 #include "Quicksort.h"
-
 void Quicksort::sort(int array[], int start, int end) {
     if(start < end) {
         int pivot = partition(array, start, end);
@@ -30,6 +29,7 @@ int Quicksort::partition(int array[], int start, int end) {
 int Quicksort::pickPivot(int array[], int start, int end) {
     return array[end];
 }
+
 
 void Quicksort::swap(int array[], int a, int b) {
     int temp = array[b];
