@@ -1,13 +1,14 @@
-#include <iostream>
 #include "Sorting/Quicksort.h"
+#include "Sorting/Mergesort.h"
+#include "Utils/ArrayUtils.h"
 
+#define MAX_VALUE_IN_ARRAY 10000
+#define ARRAY_SIZE 50
 int main() {
-    Quicksort quickSorter;
-    int testArray[] = {5, 2, 1, 8, 23};
-
-    int n=sizeof(testArray)/sizeof(testArray[0]);
-
-    quickSorter.quicksort(testArray, 0, n-1);
-    std::cout << testArray[0] << std::endl;
+    int testArray[ARRAY_SIZE];
+    generateRandomArray(testArray, ARRAY_SIZE, MAX_VALUE_IN_ARRAY);
+    printArray(testArray, ARRAY_SIZE);
+    Mergesort::sort(testArray, 0, ARRAY_SIZE - 1);
+    printArray(testArray, ARRAY_SIZE);
     return 0;
 }
