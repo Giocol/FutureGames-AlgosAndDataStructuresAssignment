@@ -4,6 +4,7 @@
 #include "Sorting/SimpleSorting.h"
 #include "Utils/ArrayUtils.h"
 #include "Utils/ProfilingUtils.h"
+#include "Utils/ParsingUtils.h"
 #include "Graph/Graph.h"
 
 #define MAX_VALUE_IN_ARRAY 10000
@@ -36,6 +37,7 @@ void graphTesting() {
     graph.addVertex(3);
     graph.getVertexById(0)->addEdge(*graph.getVertexById(1));
     graph.getVertexById(0)->addEdge(*graph.getVertexById(2));
+    bool test = graph.getVertexById(0) == graph.getVertexById(1);
     std::vector<Vertex<int>> vertices;
     graph.DFS(&graph, graph.getVertexById(0), &vertices);
 }
@@ -43,5 +45,8 @@ void graphTesting() {
 int main() {
     graphTesting();
     //measureSorting();
+    Graph<int> graph;
+    ParsingUtils::populateGraphFromFile("AssignmentNodes.txt", &graph);
+
     return 0;
 }

@@ -12,4 +12,5 @@ add_executable(FutureGames_AlgosAndDataStructuresAssignement main.cpp
         Utils/ProfilingUtils.h
         Graph/Vertex.h
         Graph/Graph.h
+        Utils/ParsingUtils.h
 )
