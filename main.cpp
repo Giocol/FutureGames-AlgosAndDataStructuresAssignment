@@ -4,6 +4,7 @@
 #include "Sorting/SimpleSorting.h"
 #include "Utils/ArrayUtils.h"
 #include "Utils/ProfilingUtils.h"
+#include "Graph/Graph.h"
 
 #define MAX_VALUE_IN_ARRAY 10000
 #define ARRAY_SIZE 500
@@ -28,7 +29,19 @@ void measureSorting() {
 
 }
 
+void graphTesting() {
+    Graph<int> graph;
+    graph.addVertex(1);
+    graph.addVertex(2);
+    graph.addVertex(3);
+    graph.getVertexById(0)->addEdge(*graph.getVertexById(1));
+    graph.getVertexById(0)->addEdge(*graph.getVertexById(2));
+    std::vector<Vertex<int>> vertices;
+    graph.DFS(&graph, graph.getVertexById(0), &vertices);
+}
+
 int main() {
-    measureSorting();
+    graphTesting();
+    //measureSorting();
     return 0;
 }

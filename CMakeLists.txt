@@ -10,4 +10,6 @@ add_executable(FutureGames_AlgosAndDataStructuresAssignement main.cpp
         Sorting/Heapsort.cpp
         Sorting/Heapsort.h
         Utils/ProfilingUtils.h
+        Graph/Vertex.h
+        Graph/Graph.h
 )
