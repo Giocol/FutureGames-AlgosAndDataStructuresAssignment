@@ -11,9 +11,39 @@
 
 namespace ParsingUtils {
 
+    struct vec2
+    {
+        int x;
+        int y;
+    };
+
+    int getVertexIdFromCoords(int i, int j, size_t size) { //simple function to linearize indexes on  a 2d matrix, size is the length of the "parent" vector/array
+        return i*size + j;
+    }
+
     template<class T>
-    void populateGraphFromMatrix(Graph<T>* graph, std::vector<std::vector<int>>* graphMatrix) {
-        //function that is going to populate the graph itself from graphMatrix
+    void connectVertexesFromMatrix(Graph<T>* graph, std::vector<std::vector<int>>* graphMatrix) {
+        //function that is going to populate each vertex's neighbors from graphMatrix
+        int currId = 0;
+        size_t graphMatrixSize = graphMatrix->size();
+        for(int i = 0; i<graphMatrixSize; i++) {
+            for(int j = 0; j<(*graphMatrix)[i].size(); j++) {
+                auto test = ((*graphMatrix)[i])[j];
+                if(i > 0 && (*graphMatrix)[i-1][j] != -1) {//element to the left, if it exists and it's not a wall (walls are marked as -1 in the graphMatrix)
+                    graph->getVertexById(currId)->addEdge(graph->getVertexById(getVertexIdFromCoords(i-1, j, graphMatrixSize)));
+                }
+                if(j > 0 && (*graphMatrix)[i][j-1] != -1) { //element below
+                    graph->getVertexById(currId)->addEdge(graph->getVertexById(getVertexIdFromCoords(i, j-1, graphMatrixSize)));
+                }
+                if((i < (*graphMatrix)[i].size() -1) && (*graphMatrix)[i+1][j] != -1) { //element to the right
+                    graph->getVertexById(currId)->addEdge(graph->getVertexById(getVertexIdFromCoords(i+1, j, graphMatrixSize)));
+                }
+                if((j < (*graphMatrix)[i].size() -1) && (*graphMatrix)[i][j+1] != -1) { //element above
+                    graph->getVertexById(currId)->addEdge(graph->getVertexById(getVertexIdFromCoords(i, j+1, graphMatrixSize)));
+                }
+                currId++;
+            }
+        }
     }
 
     template<class T>
@@ -28,18 +58,23 @@ namespace ParsingUtils {
                 graphMatrix.emplace_back( );
                 for(int j=0; j<length; j++) {
                     std::cout << line[j];
+                    vec2 data = {i, j};
+                    graph->addVertex(data); //since the file doesn't have any actual data, i'm passing a vec2 containing its coords
                     switch (line[j]) {
                         case 'X':
                             graphMatrix[i].push_back(-1);
                             break;
                         case 'S':
                             graphMatrix[i].push_back(1);
+                            graph->startVertex = graph->getVertexById(getVertexIdFromCoords(i, j, length));
                             break;
                         case 'G':
                             graphMatrix[i].push_back(2);
+                            graph->goalVertex = graph->getVertexById(getVertexIdFromCoords(i, j, length));
                             break;
                         default:
                             graphMatrix[i].push_back(0);
+                            break;
                     }
                 }
                 std::cout << std::endl;
@@ -47,7 +82,7 @@ namespace ParsingUtils {
             }
             graphMatrix.pop_back(); //hacky, removes the last element that is always created empty by the previous while loop
             file.close();
-            populateGraphFromMatrix(graph, &graphMatrix);
+            connectVertexesFromMatrix(graph, &graphMatrix);
         } else {
             std::cout << "unable to open file";
         }

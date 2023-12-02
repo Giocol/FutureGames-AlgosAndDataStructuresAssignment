@@ -17,6 +17,8 @@ public:
     Vertex<T>* getVertexById(int id) {
         return &vertices[id];
     }
+    Vertex<T>* startVertex;
+    Vertex<T>* goalVertex;
 
 private:
     std::vector<Vertex<T>> vertices;
@@ -33,7 +35,7 @@ void Graph<T>::addVertex(T newVertexData) {
 
 
 template<class T>
-void Graph<T>::DFS(Graph<T> *graph, Vertex<T> *vertex, std::vector<Vertex<T>>* discoveredVertexs) {
+void Graph<T>::DFS(Graph<T> *graph, Vertex<T> *vertex, std::vector<Vertex<T>>* discoveredVertexs) { //early out if you find the target
     discoveredVertexs->push_back(*vertex);
     for(Vertex<T>* neighbor : vertex->neighbors) {
         if(!contains(discoveredVertexs, *neighbor)) {
