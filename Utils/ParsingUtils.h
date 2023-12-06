@@ -15,6 +15,13 @@ namespace ParsingUtils {
     {
         int x;
         int y;
+
+        bool operator==(const vec2 other) const {
+            if (x == other.x && y == other.y) {
+                return true;
+            }
+            return false;
+        }
     };
 
     int getVertexIdFromCoords(int i, int j, size_t size) { //simple function to linearize indexes on  a 2d matrix, size is the length of the "parent" vector/array

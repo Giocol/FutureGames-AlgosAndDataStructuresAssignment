@@ -48,7 +48,7 @@ void Graph<T>::DFS(Graph<T> *graph, Vertex<T> *vertex, std::vector<Vertex<T>>* d
 
 template<class T>
 void Graph<T>::BFS(Graph<T> *graph, Vertex<T>* initialVertex, std::vector<Vertex<T>>* listToVisit, std::vector<Vertex<T>>* visited) {
-    visited->push_back(initialVertex);
+    visited->push_back(*initialVertex);
     std::vector<Vertex<T>> newListToVisit;
     for(Vertex<T>* node : listToVisit) {
         visited->push_back(node);

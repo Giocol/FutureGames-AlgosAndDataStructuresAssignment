@@ -31,22 +31,17 @@ void measureSorting() {
 }
 
 void graphTesting() {
-    Graph<int> graph;
-    graph.addVertex(1);
-    graph.addVertex(2);
-    graph.addVertex(3);
-    graph.getVertexById(0)->addEdge(graph.getVertexById(1));
-    graph.getVertexById(0)->addEdge(graph.getVertexById(2));
-    bool test = graph.getVertexById(0) == graph.getVertexById(1);
-    std::vector<Vertex<int>> vertices;
-    graph.DFS(&graph, graph.getVertexById(0), &vertices);
+    Graph<ParsingUtils::vec2> graph;
+    ParsingUtils::populateGraphFromFile("AssignmentNodes.txt", &graph);
+    std::vector<Vertex<ParsingUtils::vec2>> vertices;
+    std::vector<Vertex<ParsingUtils::vec2>> listToVist;
+    graph.DFS(&graph, graph.startVertex, &vertices);
+    graph.BFS(&graph, graph.startVertex, &listToVist, &vertices);
 }
 
 int main() {
     graphTesting();
     //measureSorting();
-    Graph<ParsingUtils::vec2> graph;
-    ParsingUtils::populateGraphFromFile("AssignmentNodes.txt", &graph);
 
     return 0;
 }
