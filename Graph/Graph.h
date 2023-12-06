@@ -14,6 +14,7 @@ class Graph {
 public:
     void addVertex(T newVertexData);
     void DFS(Graph<T> *graph, Vertex<T> *vertex, std::vector<Vertex<T>>* discoveredVertexs);
+    void BFS(Graph<T> *graph, Vertex<T> *initialVertex, std::vector<Vertex<T>> *listToVisit, std::vector<Vertex<T>> *visited);
     Vertex<T>* getVertexById(int id) {
         return &vertices[id];
     }
@@ -24,6 +25,7 @@ private:
     std::vector<Vertex<T>> vertices;
 
     bool contains(const std::vector<Vertex<T>>* vector, Vertex<T>& element); //helper function to find if element is in list
+
 };
 
 
@@ -35,7 +37,7 @@ void Graph<T>::addVertex(T newVertexData) {
 
 
 template<class T>
-void Graph<T>::DFS(Graph<T> *graph, Vertex<T> *vertex, std::vector<Vertex<T>>* discoveredVertexs) { //early out if you find the target
+void Graph<T>::DFS(Graph<T> *graph, Vertex<T> *vertex, std::vector<Vertex<T>>* discoveredVertexs) { //TODO: early out if you find the target
     discoveredVertexs->push_back(*vertex);
     for(Vertex<T>* neighbor : vertex->neighbors) {
         if(!contains(discoveredVertexs, *neighbor)) {
@@ -43,6 +45,22 @@ void Graph<T>::DFS(Graph<T> *graph, Vertex<T> *vertex, std::vector<Vertex<T>>* d
         }
     }
 }
+
+template<class T>
+void Graph<T>::BFS(Graph<T> *graph, Vertex<T>* initialVertex, std::vector<Vertex<T>>* listToVisit, std::vector<Vertex<T>>* visited) {
+    visited->push_back(initialVertex);
+    std::vector<Vertex<T>> newListToVisit;
+    for(Vertex<T>* node : listToVisit) {
+        visited->push_back(node);
+        for(Vertex<T>* neighbor : node->neighbors) {
+            if(!contains(visited, *neighbor)) {
+                newListToVisit.push_back(neighbor);
+            }
+        }
+    }
+}
+
+
 
 template<class T>
 bool Graph<T>::contains(const std::vector<Vertex<T>>* vector, Vertex<T>& element) {

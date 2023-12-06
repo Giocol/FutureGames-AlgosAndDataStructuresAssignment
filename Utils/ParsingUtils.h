@@ -28,7 +28,6 @@ namespace ParsingUtils {
         size_t graphMatrixSize = graphMatrix->size();
         for(int i = 0; i<graphMatrixSize; i++) {
             for(int j = 0; j<(*graphMatrix)[i].size(); j++) {
-                auto test = ((*graphMatrix)[i])[j];
                 if(i > 0 && (*graphMatrix)[i-1][j] != -1) {//element to the left, if it exists and it's not a wall (walls are marked as -1 in the graphMatrix)
                     graph->getVertexById(currId)->addEdge(graph->getVertexById(getVertexIdFromCoords(i-1, j, graphMatrixSize)));
                 }
