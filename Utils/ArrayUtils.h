@@ -24,6 +24,13 @@ namespace ArrayUtils {
         }
     }
 
+    void generateSortedArray(int array[], int size) {
+        for(int i = 0; i < size; i++) {
+            array[i] = i;
+        }
+    }
+
+
 }
 
 #endif //FUTUREGAMES_ALGOSANDDATASTRUCTURESASSIGNEMENT_ARRAYUTILS_H
