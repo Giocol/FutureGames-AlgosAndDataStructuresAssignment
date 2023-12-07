@@ -56,6 +56,8 @@ namespace ParsingUtils {
     void populateGraphFromFile(const char* fileName, Graph<T>* graph) {
         std::vector<std::vector<int>> graphMatrix; //contains 0 for nodes, 1 for start, 2 for goal, -1 for walls
         std::ifstream file (fileName);
+        int startVertexPosition;
+        int goalVertexPosition;
         if(file.is_open()) {
             std::string line;
             int i = 0;
@@ -72,11 +74,11 @@ namespace ParsingUtils {
                             break;
                         case 'S':
                             graphMatrix[i].push_back(1);
-                            graph->startVertex = graph->getVertexById(getVertexIdFromCoords(i, j, length));
+                            startVertexPosition = getVertexIdFromCoords(i, j, length);
                             break;
                         case 'G':
                             graphMatrix[i].push_back(2);
-                            graph->goalVertex = graph->getVertexById(getVertexIdFromCoords(i, j, length));
+                            goalVertexPosition = getVertexIdFromCoords(i, j, length);
                             break;
                         default:
                             graphMatrix[i].push_back(0);
@@ -88,6 +90,8 @@ namespace ParsingUtils {
             }
             graphMatrix.pop_back(); //hacky, removes the last element that is always created empty by the previous while loop
             file.close();
+            graph->startVertex = graph->getVertexById(startVertexPosition);
+            graph->goalVertex = graph->getVertexById(goalVertexPosition);
             connectVertexesFromMatrix(graph, &graphMatrix);
         } else {
             std::cout << "unable to open file";

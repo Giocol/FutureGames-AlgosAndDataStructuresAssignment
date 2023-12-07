@@ -35,8 +35,8 @@ void graphTesting() {
     ParsingUtils::populateGraphFromFile("AssignmentNodes.txt", &graph);
     std::vector<Vertex<ParsingUtils::vec2>> vertices;
     std::vector<Vertex<ParsingUtils::vec2>> listToVist;
-    graph.DFS(&graph, graph.startVertex, &vertices);
-    graph.BFS(&graph, graph.startVertex, &listToVist, &vertices);
+    //graph.DFS(graph.startVertex, &vertices);
+    auto test = graph.BFS(&listToVist, &vertices);
 }
 
 int main() {

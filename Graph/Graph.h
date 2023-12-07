@@ -8,13 +8,14 @@
 
 #include "Vertex.h"
 #include <algorithm>
+#include <queue>
 
 template<class T>
 class Graph {
 public:
     void addVertex(T newVertexData);
-    void DFS(Graph<T> *graph, Vertex<T> *vertex, std::vector<Vertex<T>>* discoveredVertexs);
-    void BFS(Graph<T> *graph, Vertex<T> *initialVertex, std::vector<Vertex<T>> *listToVisit, std::vector<Vertex<T>> *visited);
+    void DFS(Vertex<T> *vertex, std::vector<Vertex<T>>* discoveredVertexes);
+    Vertex<T> BFS(std::vector<Vertex<T>> *listToVisit, std::vector<Vertex<T>> *visited);
     Vertex<T>* getVertexById(int id) {
         return &vertices[id];
     }
@@ -37,24 +38,30 @@ void Graph<T>::addVertex(T newVertexData) {
 
 
 template<class T>
-void Graph<T>::DFS(Graph<T> *graph, Vertex<T> *vertex, std::vector<Vertex<T>>* discoveredVertexs) { //TODO: early out if you find the target
-    discoveredVertexs->push_back(*vertex);
+void Graph<T>::DFS(Vertex<T> *vertex, std::vector<Vertex<T>>* discoveredVertexes) { //TODO: early out if you find the target
+    discoveredVertexes->push_back(*vertex);
     for(Vertex<T>* neighbor : vertex->neighbors) {
-        if(!contains(discoveredVertexs, *neighbor)) {
-            DFS(graph, neighbor, discoveredVertexs);
+        if(!contains(discoveredVertexes, *neighbor)) {
+            DFS(neighbor, discoveredVertexes);
         }
     }
 }
 
 template<class T>
-void Graph<T>::BFS(Graph<T> *graph, Vertex<T>* initialVertex, std::vector<Vertex<T>>* listToVisit, std::vector<Vertex<T>>* visited) {
-    visited->push_back(*initialVertex);
-    std::vector<Vertex<T>> newListToVisit;
-    for(Vertex<T>* node : listToVisit) {
-        visited->push_back(node);
-        for(Vertex<T>* neighbor : node->neighbors) {
+Vertex<T> Graph<T>::BFS(std::vector<Vertex<T>>* listToVisit, std::vector<Vertex<T>>* visited) {
+    visited->push_back(*startVertex);
+    std::queue<Vertex<T>> q;
+    q.push(*startVertex);
+    while(!q.empty()) {
+        Vertex<T> v = q.front();
+        q.pop();
+        if(v == *goalVertex) {
+            return v;
+        }
+        for(auto neighbor : v.neighbors) {
             if(!contains(visited, *neighbor)) {
-                newListToVisit.push_back(neighbor);
+                visited->push_back(*neighbor);
+                q.push(*neighbor);
             }
         }
     }
