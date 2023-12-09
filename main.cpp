@@ -19,22 +19,22 @@ void measureSorting() {
 
     for(int i=0; i<SAMPLES; i++) {
         ArrayUtils::generateRandomArray(testArray, ARRAY_SIZE, MAX_VALUE_IN_ARRAY);
-        ArrayUtils::printArray(testArray, ARRAY_SIZE);
+        //ArrayUtils::printArray(testArray, ARRAY_SIZE);
 
         auto start = std::chrono::system_clock::now();
 
         //Quicksort::sort(testArray, 0,  ARRAY_SIZE);
         //Heapsort::sort(testArray,  ARRAY_SIZE);
         //SimpleSorting::selectionSort(testArray, ARRAY_SIZE);
-        SimpleSorting::bubbleSort(testArray, ARRAY_SIZE);
+        //SimpleSorting::bubbleSort(testArray, ARRAY_SIZE);
         //SimpleSorting::insertionSort(testArray, ARRAY_SIZE);
         auto end = std::chrono::system_clock::now();
 
         auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
         long long timeElapsed = elapsed.count();
+        //std::cout << timeElapsed << std::endl;
         ProfilingUtils::printElapsedTimeInNanos(timeElapsed, ARRAY_SIZE);
     }
-
     std::cout << "Sorted array: " << std::endl;
     ArrayUtils::printArray(testArray, ARRAY_SIZE);
 }
@@ -48,7 +48,7 @@ void graphTesting() {
 
     //graph.DFS(graph.startVertex, &vertices);
     //graph.BFS(&vertices);
-    graph.A_star(graph.startVertex, graph.goalVertex);
+    //graph.A_star(graph.startVertex, graph.goalVertex);
 
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);

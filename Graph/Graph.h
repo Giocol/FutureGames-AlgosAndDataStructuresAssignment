@@ -41,7 +41,10 @@ void Graph<T>::addVertex(T newVertexData) {
 
 
 template<class T>
-void Graph<T>::DFS(Vertex<T> *startVertex, std::vector<Vertex<T>>* discoveredVertexes) { //TODO: early out if you find the target
+void Graph<T>::DFS(Vertex<T> *startVertex, std::vector<Vertex<T>>* discoveredVertexes) {
+    if(*startVertex == *goalVertex) {
+        return; //got to target
+    }
     discoveredVertexes->push_back(*startVertex);
     for(Vertex<T>* neighbor : startVertex->neighbors) {
         if(!contains(discoveredVertexes, *neighbor)) {
